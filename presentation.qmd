@@ -1,42 +1,591 @@
 ---
-title: "Presentation"
+title: "The Design of Empirical Research"
 author: "Lachlan Deer"
-institute: "Somewhere"
+institute: "Social Media and Web Analytics, Spring 2024"
 format: 
   beamer: 
     aspectratio: 32
     navigation: horizontal
     theme: cousteau
+    #urlcolor: blue
 ---
 
-# In the morning
+```{r, echo=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(broom)
+library(infer)
+library(ggrepel)
+library(fontawesome)
+```
 
-## Getting up
+## Learning Goals
 
-- Turn off alarm
-- Get out of bed
+1. Define the term Quantitative Empirical Research
+2. Explain the criteria that make a good research question
+3. Identify why a given research question is "good"
+4. Define Identification in the context of empirical research
+5. Explain how using known facts and/or assumptions aids identification in practice
 
-## Breakfast
+# Designing Research
 
-- Eat eggs
-- Drink coffee
+## I have a Question 
 
-# In the evening
+\begin{center}
+\large
+\textbf{\alert{How does the world work?}}
+\end{center}
 
-## Dinner
 
-- Eat spaghetti
-- Drink wine
+We'll *never* know everything perfectly
 
-## Going to sleep
+$\implies$ There's \alert{always scope for new research}
 
-- Get in bed
-- Count sheep
+$\implies$ We'll \alert{need to be comfortable with simplifications}
 
-# Before I Sleep
+A \alert{\textbf{good} research question} is:
 
-## I write equations
+1. Well-defined 
+2. Answerable
+3. Understandable
 
-$$
-y = x \beta + \varepsilon
-$$
+**Our goal**: \alertb{Conduct research} in a way \alertb{that's capable of answering the question we asked}
+
+## Empirical Research
+
+The focus of this class: **\alert{quantitative empirical research}**
+
+**\alert{Empirical Research}**:
+
+* **uses** (structured) **observations from the real world** to attempt to answer questions. 
+
+**\alert{Quantitative}**:
+
+* **Uses quantitative measurements**
+* Usually numbers...
+    *  Can be hard to measure precisely
+
+## The Difficulty of Empirical Research
+
+**\alertb{Potential Problem}**: Numbers we observe might not tell us what we what to know
+
+* In which case we **cannot** answer the research question
+* Why?
+    * \alertb{Observational data} often \alertb{lacks a "what if"} or a "what would have been"
+
+**\alert{Potential Opportunity}**: Can we figure out how to:
+
+ 1. Collect the right numbers, or 
+ 2. Do the right things to those numbers, 
+
+to get an actual answer to our question
+
+$\implies$ \alertb{How can we \textbf{design} the right kind of analysis to answer our question}
+
+# Research Questions
+
+## What is a Research Question?
+
+A **\alert{good research question}** is:
+
+1. **Well-defined**: Clearly identified subject(s), outcomes and an intervention  
+2. **Answerable**: There exists some evidence that if found, would answer the question
+3. **Understandable**: clear details and context that the target audience can understand
+
+<!---
+Answerable: what is the best bond movie vs which bond movie had the highest ticket sales
+
+other definitions of good RQ include:
+    clear
+    concise
+    right for the time
+    novel
+    arguable
+    objective
+    right match of theory, data and method
+--->
+
+## What is a Research Question?
+
+Good research questions improve our understanding of how the world works
+
+* Helps improve your "*why*" explanation
+* And we are interested in the whys!
+
+## Example Research Questions
+
+## Why Start with a Question?
+
+**\alertb{Alternative}**: Start with some **\alertb{patterns in the data}** 
+
+* This is essentially *data mining*
+
+Data mining is **good** at:
+
+* Finding patterns
+* Making predictions in stable environments
+
+Data mining is **bad** at:
+
+* Answering \alert{causal questions}
+* Improving our understanding, i.e. \alert{the "why"}
+* \alert{Counterfactual analysis in unseen environments}
+* Informing theory
+
+<!---
+Data mining example:
+shorts and icecream sales => tell us correlation but not why
+--->
+
+## Where do Research Questions Come From?
+
+Sources for research questions:
+
+* **Curiosity**: wanting to know how the world works
+* **Opportunity**: having access to a dataset, does a research question come to mind
+
+\vspace{1cm}
+
+\begin{center}
+Is the need to make a business decision a form of curiosity?
+\end{center}
+
+## Have I Got a Good Question?
+
+Criteria for evaluation:
+
+* **Potential Results**: What conclusions can be drawn from your findings?
+* **Feasibility**: Is the right data available? (or can it be made available)
+* **Scale**: Is there enough resources and time to answer it?
+* **Research Design**: can a reasonable research design be found to answer it?
+* **Simple, but useful**
+
+## Example: Why Do People Contribute Content to Twitter?
+
+\begin{figure}
+\includegraphics[width=9cm]{figs/whycontribute.png}
+\end{figure}
+
+## Example: Why Do People Contribute Content to Twitter?
+
+Read the paper "[Intrinsic vs. Image-Related Utility in Social Media: Why Do People Contribute Content to Twitter?](https://pubsonline.informs.org/doi/abs/10.1287/mksc.2013.0773)" and answer the following questions:
+
+* What is the research question?
+* What is the research design?
+* Why is this a "Good" question?
+
+(Ignore Section 5 of the paper, it gets quite mathsy)
+
+## What is the Research Question?
+
+## What is the Empirical Design? 
+
+## Why is this a "Good" Question?
+
+## Summary
+
+* A good research question is well-defined, answerable and understandable
+* Research questions originate from curiosity
+* Five additional criteria help the researcher decide if their question is good
+
+# Identification
+
+## Identification in One Sentence
+
+Suppose that you have:
+
+1. A good research question 
+2. Some data that may help you answer the research question
+
+\vspace{1cm}
+
+\begin{center}
+\large
+\alert{\textbf{Identification is the process of figuring out what part of the variation in your data answers your research question}}
+\end{center}
+
+## The Data Generating Process
+
+* One way to think about science generally is that there are regular laws that govern the way the universe works
+
+* These laws are an example of a **\alertb{data generating process}**
+    * They work "behind the scenes"
+    * ... i.e. we **\alertb{do not observe them}** directly
+
+* We **\alert{do observe the data resulting from the laws}**
+    * From which **\alert{we try describe or test the which laws are actually at play}** 
+    * ... based on whether the data support their predictions
+
+* In social science and business, these laws are less well behaved and more imprecise than the hard sciences 
+    * But we do believe data comes from somewhat regular laws
+
+## Data Generating Processes 
+
+* **Two parts** to a data generating process (DGP)
+    1. \alertb{Parts we know} 
+    2. \alert{Parts we do not know}
+        * What we want to learn about
+
+* The \alertb{parts we know are still important}
+    * **We don't start from "nothing"** each time we embark on something new 
+    * It helps us **refine how we think** about what we don't know 
+
+## A Simple DGP
+
+1. Income is log-normally distributed
+2. Being brown-haired gives you a 10% income boost
+3. 20% of people are naturally brown-haired
+4. Having a college degree gives you a 20% income boost
+5. 30% of people have college degrees
+6. 40% of people who don’t have brown hair or a college degree will choose to dye their hair brown
+
+Let's generate data from these laws and view the results!
+
+## Simulating Data from the DGP
+
+
+```{r, echo = FALSE, cache=TRUE}
+set.seed(987987)
+
+df <- 
+    tibble(College = runif(5000) < .3) %>%
+    mutate(Hair = case_when(
+                runif(5000) < .2+.8*.4*(!College) ~ "Brown",
+                TRUE ~ "Other Color"
+                ),
+    logIncome = .1*(Hair == "Brown") + 
+                .2*College + rnorm(5000) + 5 
+           )
+``` 
+
+
+## Visualizing Data from the DGP
+
+```{r, echo = FALSE, out.width = "80%", fig.align='center'}
+ggplot(df %>% filter(Hair == "Brown"), aes(x = logIncome, linetype = Hair)) +
+  stat_density(geom = 'line', size = 1) +
+  stat_density(data = df %>% filter(Hair == "Other Color"), 
+               geom = 'line', size = 1) +
+  theme_bw() + 
+  labs(x = "Log Income", y = "Density") + 
+  theme(text         = element_text(size = 16),
+        axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16),
+        legend.position = c(.2,.8),
+        legend.background = element_rect())
+```
+
+\begin{center}
+Can you eye-conometrically see any differences?
+\end{center}
+
+## Learning About the DGP
+
+<!---
+\begin{center}
+We do not know what the laws are ... we only observe the data
+\end{center}
+--->
+
+\textbf{\alert{Research Question}}: **What is the effect of being brown-haired on income?**
+
+```{r}
+df %>%
+  group_by(Hair) %>%
+  summarize(log_income = round(mean(logIncome),3)) 
+```
+
+Suggests that brown haired people earn approx. 1% more than people with other colors
+
+* But **\alertb{our laws say this effect is 10\%!}**
+* Differences in means are not enough in this scenario
+
+## Learning About the DGP
+
+\begin{center}
+\textbf{Imagine we know everything about the data generating process \textit{except} the effect of brown hair on income}
+\end{center}
+
+Does this help us get the right answer?
+
+<!---
+Helps us get at the right answer ...
+    * Among college students nobody is dying their hair
+    * So there's no reason we can see why brown hair and income might be related except for brown hair giving you an income boost
+
+$\implies$ let's focus only on college students and re-run our summary statistics
+--->
+
+## Learning About the DGP
+
+```{r}
+df %>%
+  filter(College) %>%
+  group_by(Hair) %>%
+  summarize(`Log Income` = round(mean(logIncome),3))
+```
+
+Now we see **\alert{the effect is 13\%}** ... 
+
+* **Closer to 10%!**
+* Difference is due to **randomness** 
+
+## Re-Running Our Experiment Many Times
+
+What if we re-run the experiment 1000 times?
+
+```{r, echo = FALSE, cache=TRUE, out.width = "70%", fig.align='center', eval=TRUE}
+sim_data = function(){
+    df <- 
+    tibble(College = runif(5000) < .3) %>%
+    mutate(Hair = case_when(
+                runif(5000) < .2+.8*.4*(!College) ~ "Brown",
+                TRUE ~ "Other Color"
+                ),
+    logIncome = .1*(Hair == "Brown") + 
+                .2*College + rnorm(5000) + 5 
+           )
+return(df)
+}
+
+set.seed(42)
+all_data <- tibble::enframe(replicate(n = 1000, 
+                                      sim_data(), 
+                                      simplify = FALSE)
+                            )
+
+all_data <- tidyr::unnest(all_data, cols = c(value))
+
+whole_pop <-
+    all_data %>%
+    group_by(name, Hair) %>%
+    summarize(log_income = round(mean(logIncome),3)) %>%
+    tidyr::pivot_wider(names_from = Hair, values_from = log_income) %>%
+    janitor::clean_names() %>%
+    ungroup() %>%
+    mutate(all_dif = brown - other_color)
+
+
+ college_only <-
+    all_data %>%
+    filter(College) %>%
+    group_by(name, Hair) %>%
+    summarize(log_income = round(mean(logIncome),3)) %>%
+    tidyr::pivot_wider(names_from = Hair, values_from = log_income) %>%
+    janitor::clean_names() %>%
+    ungroup() %>%
+    mutate(college_dif = brown - other_color)
+
+
+comparison <-
+    whole_pop %>%
+    inner_join(college_only, by = c("name"))
+
+comparison %>%
+    ggplot() + 
+    stat_density(aes(x=all_dif), geom = 'line', size = 1, color = "blue") +
+    stat_density(aes(x=college_dif), geom = 'line', size = 1, color = "purple") +
+    geom_vline(xintercept = 0.1, color = "red", linetype = 2) + 
+      theme_bw() + 
+      labs(x = "Effect of Brown Hair", y = "Density") + 
+        theme(text         = element_text(size = 16),
+        axis.title.x = element_text(size = 16),
+        axis.title.y = element_text(size = 16),
+        #legend.position = c(.2,.8),
+        legend.background = element_rect())
+```
+
+\begin{center}
+\textbf{Using what we know can help us get the right answer (on average)!}
+\end{center}
+
+## How the Heck did that Work?
+
+**We get the right answer** ... 
+
+* Or close enough when we had one sample
+* On average when we had access to many samples
+
+* **\alert{The right answer involved using our knowledge of the DGP}** 
+    * But how exactly?
+
+* **Two ideas** where at play
+    * **\alert{Looking for variation}**
+    * **\alert{Identification}**
+* Let's consider these in turn ...
+    
+## Example: Price & Volume of Avocados
+
+```{r, echo = FALSE, out.width = "80%", fig.align='center', cache=TRUE}
+avocados <- 
+    read_csv("data/avocado.csv") %>%
+    janitor::clean_names() %>%
+    filter(region == "California",
+           type == "conventional")
+
+
+ggplot(avocados, aes(y = total_volume/1e6, x = average_price)) + 
+  geom_point(size = 1)+
+  theme_bw() + 
+  theme(text         = element_text(size = 16),
+          axis.title.x = element_text(size = 16),
+          axis.title.y = element_text(size = 16)
+        ) +
+  labs(y = "Total Avocados Sold (Millions)",
+       x = "Average Avocado Price",
+       title = "",
+       caption = "Data from Hass Avocado Board\nc/o https://www.kaggle.com/datasets/neuromusic/avocado-prices")
+```
+
+## Example: Price & Volume of Avocados
+
+Answer the following three questions:
+
+1. What conclusions can you draw from the previous figure?
+2. What research question could you answer with this data?
+3. Can you answer your question in (2) using the figure?
+
+## Answers to the questions 
+
+1. Avocado sales tend to be lower in weeks where the price of avocados is high
+2. What is the effect of a price increase on the number of avocados people buy
+3. No, covariation is not enough!
+
+## Covariation is Not Enough
+
+Consider these datapoints from two consecutive weeks:
+
+```{r, echo = FALSE, out.width="80%", fig.align='center', cache=TRUE}
+avocados %>%
+    mutate(isolate = row_number() %in% 4:5) %>%
+    ggplot(aes(y = total_volume/1e6, x = average_price, alpha = isolate)) + 
+    geom_point(size = 2)+
+    theme_bw()+
+    guides(alpha = "none") + 
+    scale_alpha_manual(values = c(0,1)) +
+    geom_label_repel(aes(label = as.character(date)), direction = 'y') +
+    theme(text         = element_text(size = 16),
+          axis.title.x = element_text(size = 16),
+          axis.title.y = element_text(size = 16)
+        ) +
+    labs(y = "Total Avocados Sold (Millions)",
+       x = "Average Avocado Price",
+       title = "",
+       caption = "Data from Hass Avocado Board\nc/o https://www.kaggle.com/datasets/neuromusic/avocado-prices")
+```
+
+## Covariation is Not Enough
+
+**\alert{Why did price drop and quantity rise}** from January to February that year?
+
+* Is it because a drop in price made people buy more? 
+* Is it because the market was flooded with avocados so people wouldn't pay as much for them? 
+* Is it because the high price in January made suppliers bring way more avocados to market in February?
+
+It's **probably a little bit of all of these reasons**
+
+* Which means its going to be **\alertb{tough}** to answer our RQ
+
+## Where's Your Variation?
+
+**How can we find the variation in the data that answers our question?**
+
+* We have to ask **\alert{"What is the variation that we want to find?"}**
+* We want **variation in people buying avocados** (rather than people selling them) that is **driven by changes in the price**
+
+We need to \alertb{use what we know about the data generating process} to learn a little more
+
+* Or, what we are comfortable **assuming**
+ 
+## "Useful" Variation & Assumptions 
+
+**Assumption**: At the beginning of each month, avocado **suppliers make a plan** for what **avocado prices** will be **each week in that month**, and **\alertb{never change their plans}** until the next month
+
+* Avocado **sellers cannot respond to unexpected jumps in demand** week-to-week within a month
+
+$\implies$ **\alert{Variation in price and quantity from week to week in the same month}** will **\alert{isolate variation in}** people **\alert{buying}** avocados that can only be **\alert{driven by changes in the price}**
+
+* We would only want to **use week-to-week variation with months** to answer our research question
+* \alertb{Lurking question}: How do we do it?!
+
+
+## Identification
+
+\textbf{\alert{Identification}} is the process of **figuring out what part of the variation in your data answers your research question** and **isolating it**
+
+* Ensuring that our **calculation** identifies a **single** theoretical **mechanism of interest**
+
+
+* A research question takes us from theory to hypothesis
+* Identification takes us from hypothesis to the data
+    * **Making sure** that we have **a way of testing that hypothesis in the data**
+    * And not accidentally testing some other hypothesis instead.
+
+
+## Identification and *This* Course
+**This course**: Variation based on \alert{(quasi-) experiments in the field}
+
+* Why? Less assumptions needed on how consumers and firms behave
+    * (That's the claim ...)
+    * (It's more subtle than that if one wants to think deeper)
+    * This is not cost-free ... can limit scope of what we can study
+
+## Example: Why Do People Contribute Content to Twitter?
+
+Read the paper "[Intrinsic vs. Image-Related Utility in Social Media: Why Do People Contribute Content to Twitter?](https://pubsonline.informs.org/doi/abs/10.1287/mksc.2013.0773)" and answer the following questions:
+
+* Explain the two reasons a Twitter user wants to post according to the authors.
+* What variation do they use to answer their question?
+* Why couldn't they have used an existing dataset that contains usernames, follower counts and post behaviour to answer their research question
+
+(Ignore Section 5 of the paper)
+
+## Summary
+
+* Identification is the process of figuring out what part of the variation in your data answers your research question and isolating it
+* Researchers use existing knowledge and assumptions to help overcome the identification challenge when tackling new questions
+
+# Wrap Up
+
+## Context and Omniscience
+
+**Understanding context is incredibly important**
+
+* Enables you to block alternative explanations and identify the answer to your question
+
+* Thoughts of Two Nobel Laureates Joshua Angrist and Alan Krueger (2001):
+
+"Here the challenges are not primarily technical in the sense of requiring new theorems or estimators. Rather, progress comes from detailed institutional knowledge and the careful investigation and quantification of the forces at work in a particular setting. Of course, such endeavors are not really new. They have always been at the heart of good empirical research." 
+
+## What should you do this week?
+
+* Enroll in a Lab Section
+* Install `R` if you haven't done so already 
+* Prepare your answers to Lab Assignment 1, they'll be discussed in Week 2's Lab Section.
+* Read assigned readings for the next lecture.
+
+## Acknowledgements
+
+This lecture borrows heavily from the book "[The Effect](https://theeffectbook.net/)" by [Nicholas Huntington-Klein](http://nickchk.com/)
+
+* In particular, I borrow from Chapters 1, 2, and 5.
+
+## License & Citation
+\small
+Suggested Citation:
+
+```{r, engine='out', echo=TRUE, eval = FALSE}
+@misc{smwa2024_design,
+      title={"Social Media and Web Analytics: The Design of 
+             Empirical Research"},
+      author={Lachlan Deer},
+      year={2024},
+      url = "https://tisem-digital-marketing.github.io/2024-smwa"
+}
+```
+
+This course adheres to the principles of the [\alertb{Open Science Community of Tilburg University}](https://www.tilburguniversity.edu/research/open-science-community). 
+This initiative advocates for transparency and accessibility in research and teaching to all levels of society and thus creating more accountability and impact.
+
+This work is licensed under a [\alertb{Creative Commons Attribution-ShareAlike 4.0 International License}](http://creativecommons.org/licenses/by-sa/4.0/).
