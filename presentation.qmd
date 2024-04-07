@@ -245,7 +245,7 @@ Let's generate data from these laws and view the results!
 ## Simulating Data from the DGP
 
 
-```{r, echo = FALSE, cache=TRUE}
+```{r, echo = TRUE, cache=TRUE}
 set.seed(987987)
 
 df <- 
@@ -309,17 +309,16 @@ Suggests that brown haired people earn approx. 1% more than people with other co
 
 Does this help us get the right answer?
 
-<!---
 Helps us get at the right answer ...
-    * Among college students nobody is dying their hair
-    * So there's no reason we can see why brown hair and income might be related except for brown hair giving you an income boost
+
+* Among college students nobody is dying their hair
+* So there's no reason we can see why brown hair and income might be related except for brown hair giving you an income boost
 
 $\implies$ let's focus only on college students and re-run our summary statistics
---->
 
 ## Learning About the DGP
 
-```{r}
+```{r, echo = FALSE}
 df %>%
   filter(College) %>%
   group_by(Hair) %>%
