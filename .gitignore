@@ -8,3 +8,4 @@
 .quarto/
 /.quarto/
 presentation_cache/
+*_cache/
