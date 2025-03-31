@@ -1,7 +1,7 @@
 ---
 title: "The Design of Empirical Research"
 author: "Lachlan Deer"
-institute: "Social Media and Web Analytics, Spring 2024"
+institute: "Social Media and Web Analytics, Spring 2025"
 format: 
   beamer: 
     aspectratio: 32
@@ -575,11 +575,11 @@ This lecture borrows heavily from the book "[The Effect](https://theeffectbook.n
 Suggested Citation:
 
 ```{r, engine='out', echo=TRUE, eval = FALSE}
-@misc{smwa2024_design,
+@misc{smwa2025_design,
       title={"Social Media and Web Analytics: The Design of 
              Empirical Research"},
       author={Lachlan Deer},
-      year={2024},
+      year={2025},
       url = "https://tisem-digital-marketing.github.io/2024-smwa"
 }
 ```
